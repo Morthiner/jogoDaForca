@@ -1,5 +1,4 @@
 # import pandas as pd
-# import unidecode
 # 
 # # importar a base de dados
 # paises_do_mundo = pd.read_excel('paises.xlsx')
@@ -27,29 +26,32 @@
 # print(lista_paises)
 
 import random
+import unidecode
 
-paises = ['abecasia', 'acrotiri e deceleia', 'albania', 'alemanha', 'andorra', 'armenia', 
-'austria', 'azerbaijao', 'belgica', 'bielorrussia', 'bosnia e herzegovina', 'bulgaria', 'chipre', 
-'croacia', 'dinamarca', 'escocia', 'eslovaquia', 'eslovenia', 'espanha', 'estonia', 'faroe', 'finlandia', 
-'franca', 'georgia', 'gibraltar', 'grecia', 'guernsey', 'hungria', 'ilha de man', 'ilha jan mayen', 
-'inglaterra', 'irlanda', 'irlanda do norte', 'islandia', 'italia', 'jersey', 'kosovo', 'letonia', 
+paises = ['albania', 'alemanha', 'andorra', 'austria', 'belgica', 
+'bielorrussia', 'bosnia e herzegovina', 'bulgaria', 'chipre', 
+'croacia', 'dinamarca', 'eslovaquia', 'eslovenia', 'espanha', 'estonia', 'finlandia', 
+'franca', 'georgia', 'grecia', 'hungria', 'irlanda', 'islandia', 'italia', 'kosovo', 'letonia', 
 'liechtenstein', 'lituania', 'luxemburgo', 'macedonia do norte', 'malta', 'moldavia', 'monaco', 
-'montenegro', 'noruega', 'ossetia do sul', 'pais de gales', 'paises baixos', 'polonia', 'portugal', 
+'montenegro', 'noruega', 'paises baixos', 'polonia', 'portugal', 
 'reino unido', 'republica tcheca', 'romenia', 'russia', 'san marino', 'servia', 'suecia', 'suica',
- 'transnistria', 'ucrania', 'vaticano']
+'ucrania', 'vaticano']
 
 indice = len(paises) - 1
 x = random.randint(0, indice)
 pais = paises[x]
-nome_oculto = "-" * len(pais)
+nome_oculto = "_" * len(pais)
 temp = ""
 
 print("-" * 50)
 print("Jogo da forca \nAdivinhe o país europeu:")
 print(nome_oculto)
-while True:
-    jogada = input("digite uma letra: ")
-    if temp.replace("-", " ") == pais:
+round = 0
+
+while round < 3:
+    jogada = input("\ndigite uma letra: ")
+    jogada = unidecode.unidecode(jogada.lower())
+    if temp.replace("_", " ") == pais:
         print("Voce acertou! Fim de jogo")
         break
     elif jogada in pais:
@@ -63,5 +65,8 @@ while True:
                         for i in lista_indexes:
                             nome_oculto = nome_oculto[:i] + jogada + nome_oculto[i+1:]
                             temp = nome_oculto
-        print(temp)
+        print("\n",temp,"\n")
+    else:
+        round += 1
+        print("Você tem mais {} tentativas".format(3 - round))
 print("-" * 50)
