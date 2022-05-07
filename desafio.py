@@ -27,6 +27,12 @@
 
 import random
 import unidecode
+import sys
+import os
+
+def restart_program():
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
 
 paises = ['albania', 'alemanha', 'andorra', 'austria', 'belgica', 
 'bielorrussia', 'bosnia e herzegovina', 'bulgaria', 'chipre', 
@@ -52,8 +58,14 @@ while round < 3:
     jogada = input("\ndigite uma letra: ")
     jogada = unidecode.unidecode(jogada.lower())
     if temp.replace("_", " ") == pais:
-        print("Voce acertou! Fim de jogo")
-        break
+        print('-' * 50)
+        print("Você acertou! Fim de jogo")
+        print('-' * 50)
+        continuar = input("Continuar?\n- sim\n- nao\n> ")        
+        if continuar == "sim":
+            restart_program()
+        else:
+            break
     elif jogada in pais:
         for letra in pais:
             if letra == jogada:
@@ -66,6 +78,15 @@ while round < 3:
                             nome_oculto = nome_oculto[:i] + jogada + nome_oculto[i+1:]
                             temp = nome_oculto
         print("\n",temp,"\n")
+    elif round == 2:
+        print('-' * 50)
+        print('Você perdeu! a resposta era {}'.format(pais))
+        print('-' * 50)
+        continuar = input("Continuar?\n- sim\n- nao\n> ")
+        if continuar == "sim":
+            restart_program()
+        else:
+            break
     else:
         round += 1
         print("Você tem mais {} tentativas".format(3 - round))
