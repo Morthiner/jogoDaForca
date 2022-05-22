@@ -1,6 +1,5 @@
 import random
-from hangman_art import estagios
-from hangman_art import logo
+from hangman_art import estagios, logo
 from hangman_words import lista_paises
 
 fim_do_jogo = False
