@@ -1,3 +1,4 @@
+from replit import clear
 import random
 from hangman_art import estagios, logo
 from hangman_words import lista_paises
@@ -16,6 +17,9 @@ for _ in range(tamanho_palavra):
 
 while not fim_do_jogo:
     chute = input("Escolha uma letra: ").lower()
+    
+    clear()
+    
     if chute in display:
       print("Você já chutou essa letra")
     for posicao in range(tamanho_palavra):
